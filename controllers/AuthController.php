@@ -33,7 +33,14 @@ class AuthController {
                         $_SESSION['apellido'] = $usuario->apellido;
                         $_SESSION['email'] = $usuario->email;
                         $_SESSION['admin'] = $usuario->admin ?? null;
-                        
+
+                        // Redirección
+                        if ($usuario->admin) {
+                            header('Location: /admin/dashboard');
+                        } else {
+                            header('Location: /finalizar-registro');
+                        }
+
                     } else {
                         Usuario::setAlerta('error', 'Password Incorrecto');
                     }
@@ -56,7 +63,6 @@ class AuthController {
             $_SESSION = [];
             header('Location: /');
         }
-       
     }
 
     public static function registro(Router $router) {
@@ -138,7 +144,7 @@ class AuthController {
 
                     $alertas['exito'][] = 'Hemos enviado las instrucciones a tu email';
                 } else {
-                 
+                
                     // Usuario::setAlerta('error', 'El Usuario no existe o no esta confirmado');
 
                     $alertas['error'][] = 'El Usuario no existe o no esta confirmado';
@@ -190,7 +196,7 @@ class AuthController {
 
                 // Redireccionar
                 if($resultado) {
-                    header('Location: /');
+                    header('Location: /login');
                 }
             }
         }
