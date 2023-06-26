@@ -31,7 +31,7 @@ class Router
         if ( $fn ) {
             call_user_func($fn, $this);
         } else {
-            header('Location: /404');
+            //header('Location: /404');
         }
     }
 
